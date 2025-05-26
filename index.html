@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pneumonia Detection Using X-ray</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <!-- Background image -->
+    <div class="background"></div>
+
+    <!-- Logo at top-left -->
+    <div class="logo">
+        <img src="{{ url_for('static', filename='logo.png') }}" alt="MedX Logo">
+    </div>
+
+    <!-- Main content container -->
+    <div class="container">
+        <div class="card">
+            <h1>Pneumonia Detection</h1>
+            <p>Upload a chest X-ray image for prediction</p>
+            
+            <!-- Upload form -->
+            <form action="/predict" method="POST" enctype="multipart/form-data">
+                <input type="file" name="image" id="image" required>
+                <button type="submit">Predict</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Prediction popup (shown if prediction exists) -->
+    {% if prediction %}
+    <div class="popup">
+        <div class="popup-content">
+            <h2>Prediction: {{ prediction }}</h2>
+            <button onclick="closePopup()">Close</button>
+        </div>
+    </div>
+    {% endif %}
+
+    <!-- JavaScript for popup -->
+    <script>
+        function closePopup() {
+            document.querySelector('.popup').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
